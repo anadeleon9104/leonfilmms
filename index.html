@@ -93,8 +93,8 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
-    padding: 0 4rem 5rem;
+    justify-content: center;
+    padding: 7rem 4rem 5rem;
     position: relative;
     overflow: hidden;
   }
@@ -124,6 +124,63 @@
   }
   .hero-line:nth-child(1) { left: 33%; }
   .hero-line:nth-child(2) { left: 66%; }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(360px, 1fr);
+    align-items: center;
+    gap: clamp(2rem, 5vw, 6rem);
+  }
+
+  .hero-copy {
+    max-width: 650px;
+  }
+
+  .hero-video-card {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #050505;
+    border: 1px solid rgba(201,168,76,0.45);
+    overflow: hidden;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.55);
+  }
+
+  .hero-video-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background:
+      linear-gradient(to top, rgba(8,8,8,0.35), transparent 45%),
+      linear-gradient(to right, rgba(8,8,8,0.18), transparent 35%);
+  }
+
+  .hero-video-card::after {
+    content: 'SHOWREEL · 10S';
+    position: absolute;
+    left: 1rem;
+    bottom: 0.9rem;
+    z-index: 2;
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--white);
+    opacity: 0.75;
+  }
+
+  .hero-video-card video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: contrast(1.05) saturate(1.05);
+  }
 
   .hero-eyebrow {
     position: relative;
@@ -216,6 +273,7 @@
 
   .hero-stats {
     position: absolute;
+    z-index: 2;
     right: 4rem;
     bottom: 5rem;
     display: flex;
@@ -623,6 +681,7 @@
   .hero-title { animation: fadeUp 0.8s ease 0.4s both; }
   .hero-subtitle { animation: fadeUp 0.8s ease 0.6s both; }
   .hero-actions { animation: fadeUp 0.8s ease 0.8s both; }
+  .hero-video-card { animation: fadeUp 0.8s ease 0.9s both; }
   .hero-stats { animation: fadeUp 0.8s ease 1s both; }
 
   /* RESPONSIVE */
@@ -630,6 +689,9 @@
     nav { padding: 1.2rem 1.5rem; }
     .nav-links { display: none; }
     section, .hero { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .hero { padding-top: 7rem; }
+    .hero-content { grid-template-columns: 1fr; }
+    .hero-video-card { margin-top: 1rem; }
     .hero-stats { display: none; }
     .services-grid { grid-template-columns: 1fr; }
     .service-card { border-right: none; border-bottom: 1px solid var(--border); }
@@ -662,19 +724,30 @@
   <div class="hero-line"></div>
   <div class="hero-line"></div>
 
-  <p class="hero-eyebrow">Cinematografía · Drone · Branding Visual</p>
-  <h1 class="hero-title">
-    CADA<br>
-    HISTORIA<br>
-    <span class="accent">MERECE</span><br>
-    BRILLAR
-  </h1>
-  <p class="hero-subtitle">
-    Producción audiovisual para eventos deportivos, empresas y emprendimientos que quieren comunicar con impacto.
-  </p>
-  <div class="hero-actions">
-    <a href="#trabajo" class="btn-primary">Ver trabajo</a>
-    <a href="#contacto" class="btn-ghost">Cotizar proyecto</a>
+  <div class="hero-content">
+    <div class="hero-copy">
+      <p class="hero-eyebrow">Cinematografía · Drone · Branding Visual</p>
+      <h1 class="hero-title">
+        CADA<br>
+        HISTORIA<br>
+        <span class="accent">MERECE</span><br>
+        BRILLAR
+      </h1>
+      <p class="hero-subtitle">
+        Producción audiovisual para eventos deportivos, empresas y emprendimientos que quieren comunicar con impacto.
+      </p>
+      <div class="hero-actions">
+        <a href="#trabajo" class="btn-primary">Ver trabajo</a>
+        <a href="#contacto" class="btn-ghost">Cotizar proyecto</a>
+      </div>
+    </div>
+
+    <div class="hero-video-card" aria-label="Video aéreo de LeonFilmms">
+      <video autoplay muted loop playsinline preload="metadata">
+        <source src="assets/videos/leonfilmms-drone-hero.mp4" type="video/mp4">
+        Tu navegador no soporta video HTML5.
+      </video>
+    </div>
   </div>
 
   <div class="hero-stats">
@@ -820,6 +893,7 @@
           <option>Video empresarial</option>
           <option>Tomas aéreas con drone</option>
           <option>Branding visual</option>
+          <option>Página Web</option>
           <option>Otro</option>
         </select>
       </div>
